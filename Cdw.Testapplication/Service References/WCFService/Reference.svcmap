@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b563183f-6bff-4f34-8f79-4b192a96b13f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://umdac-olho0001.ad.umu.se/Cdw.Service/Service.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Service.disco" MetadataType="Disco" ID="ec9140b4-eb36-4ed6-873c-03d9ab0bd615" SourceId="1" SourceUrl="https://umdac-olho0001.ad.umu.se/Cdw.Service/Service.svc?disco" />
+    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="000fe136-2895-41e6-8f0b-cfaad61c53b6" SourceId="1" SourceUrl="https://umdac-olho0001.ad.umu.se/Cdw.Service/Service.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="4bc27f96-6932-4bca-b826-d8ea436adb11" SourceId="1" SourceUrl="https://umdac-olho0001.ad.umu.se/Cdw.Service/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="8f895bad-e902-4fa4-bb01-8e4c0e746d0c" SourceId="1" SourceUrl="https://umdac-olho0001.ad.umu.se/Cdw.Service/Service.svc?xsd=xsd3" />
+    <MetadataFile FileName="Service3.xsd" MetadataType="Schema" ID="4de1aec1-fbda-48ad-a36e-3237c5438003" SourceId="1" SourceUrl="https://umdac-olho0001.ad.umu.se/Cdw.Service/Service.svc?xsd=xsd2" />
+    <MetadataFile FileName="Service.wsdl" MetadataType="Wsdl" ID="0f8d1e6d-be00-456c-bd58-295f64a9a114" SourceId="1" SourceUrl="https://umdac-olho0001.ad.umu.se/Cdw.Service/Service.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="31002bac-24a4-4b6a-b92f-e89828377be4" SourceId="1" SourceUrl="https://umdac-olho0001.ad.umu.se/Cdw.Service/Service.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

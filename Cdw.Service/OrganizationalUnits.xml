@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<OrganizationalUnits>
+    <OrganizationalUnit>
+        <DistinguishedName>CN=Computers,DC=Testad,DC=local</DistinguishedName>
+        <ComputerNamePrefix>COMP</ComputerNamePrefix>
+        <DisplayName>Computers</DisplayName>
+        <Users>
+            <User>user01</User>
+        </Users>
+        <Groups>
+            <Group>Group 1</Group>
+            <Group>Group 2</Group>
+            <Group>Group 3</Group>
+            <Group>Group 4</Group>
+            <Group>Group 5</Group>
+            <Group>Group 6</Group>
+            <Group>Group 7</Group>
+            <Group>Group 8</Group>
+        </Groups>
+    </OrganizationalUnit>
+</OrganizationalUnits>

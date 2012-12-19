@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="75b6a17c-eba0-4a83-8895-aeabf58a3c39" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://130.239.1.177/Cdw.Service/Service.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Service2.wsdl" MetadataType="Wsdl" ID="5d2ec054-1398-45b1-9901-b03318274ef7" SourceId="1" SourceUrl="http://130.239.1.177/Cdw.Service/Service.svc?wsdl" />
+    <MetadataFile FileName="Service1.disco" MetadataType="Disco" ID="f3ad18d1-e3f6-4063-a1bf-0954b77995c9" SourceId="1" SourceUrl="http://130.239.1.177/Cdw.Service/Service.svc?disco" />
+    <MetadataFile FileName="Service21.wsdl" MetadataType="Wsdl" ID="4b79fa69-24e3-4a31-92d2-ee0c65f1d94a" SourceId="1" SourceUrl="http://130.239.1.177/Cdw.Service/Service.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="Service4.xsd" MetadataType="Schema" ID="8c4fa085-a768-444f-9be5-6d909e624d7b" SourceId="1" SourceUrl="http://130.239.1.177/Cdw.Service/Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service41.xsd" MetadataType="Schema" ID="c09ac091-8826-406c-8cce-277216c8786b" SourceId="1" SourceUrl="http://130.239.1.177/Cdw.Service/Service.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service42.xsd" MetadataType="Schema" ID="1b7b00aa-6274-4366-97c2-a7c3a20bb523" SourceId="1" SourceUrl="http://130.239.1.177/Cdw.Service/Service.svc?xsd=xsd2" />
+    <MetadataFile FileName="Service43.xsd" MetadataType="Schema" ID="826f4804-2db1-492c-8de9-854899f40caa" SourceId="1" SourceUrl="http://130.239.1.177/Cdw.Service/Service.svc?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

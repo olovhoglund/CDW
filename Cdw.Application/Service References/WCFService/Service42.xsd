@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Cdw.Objects" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Cdw.Objects" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://130.239.1.177/Cdw.Service/Service.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:complexType name="LoginContext">
+    <xs:sequence>
+      <xs:element name="_x003C_DomainController_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Domain_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoginContext" nillable="true" type="tns:LoginContext" />
+  <xs:complexType name="AuthenticationRequest">
+    <xs:sequence>
+      <xs:element name="_x003C_Computer_x003E_k__BackingField" nillable="true" type="tns:Computer" />
+      <xs:element name="_x003C_Domain_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Password_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Username_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthenticationRequest" nillable="true" type="tns:AuthenticationRequest" />
+  <xs:complexType name="Computer">
+    <xs:sequence>
+      <xs:element name="_x003C_BiosGuid_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_BiosVersion_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DHCPReservation_x003E_k__BackingField" type="xs:boolean" />
+      <xs:element name="_x003C_Department_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Description_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DriverPath_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Exists_x003E_k__BackingField" type="xs:boolean" />
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Groups_x003E_k__BackingField" nillable="true" type="q1:ArrayOfstring" />
+      <xs:element name="_x003C_IPAddress_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_InstalledBy_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_InstalledDate_x003E_k__BackingField" type="xs:dateTime" />
+      <xs:element name="_x003C_Language_x003E_k__BackingField" nillable="true" type="tns:LanguageItem" />
+      <xs:element name="_x003C_Location_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_MACAddress_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Manufacturer_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Model_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Name_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_OrganizationalUnit_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Owner_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Prefix_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_SerialNumber_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Computer" nillable="true" type="tns:Computer" />
+  <xs:complexType name="LanguageItem">
+    <xs:sequence>
+      <xs:element name="_x003C_LanguageCode_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_LanguageName_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LanguageItem" nillable="true" type="tns:LanguageItem" />
+  <xs:complexType name="AuthenticationResponse">
+    <xs:sequence>
+      <xs:element name="_x003C_DeploymentContext_x003E_k__BackingField" nillable="true" type="tns:DeploymentContext" />
+      <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Errors_x003E_k__BackingField" nillable="true" type="q2:ArrayOfstring" />
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Messages_x003E_k__BackingField" nillable="true" type="q3:ArrayOfstring" />
+      <xs:element name="_x003C_Result_x003E_k__BackingField" type="tns:Statics.Result" />
+      <xs:element name="_x003C_User_x003E_k__BackingField" nillable="true" type="tns:UserContext" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AuthenticationResponse" nillable="true" type="tns:AuthenticationResponse" />
+  <xs:complexType name="DeploymentContext">
+    <xs:sequence>
+      <xs:element name="_x003C_DomainController_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Domain_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ForceGeneratedName_x003E_k__BackingField" type="xs:boolean" />
+      <xs:element name="_x003C_OrganizationalUnits_x003E_k__BackingField" nillable="true" type="tns:ArrayOfOrganizationalUnit" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeploymentContext" nillable="true" type="tns:DeploymentContext" />
+  <xs:complexType name="ArrayOfOrganizationalUnit">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrganizationalUnit" nillable="true" type="tns:OrganizationalUnit" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrganizationalUnit" nillable="true" type="tns:ArrayOfOrganizationalUnit" />
+  <xs:complexType name="OrganizationalUnit">
+    <xs:sequence>
+      <xs:element name="_x003C_ComputerNamePrefix_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DisplayName_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DistinguishedName_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Groups_x003E_k__BackingField" nillable="true" type="q4:ArrayOfstring" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrganizationalUnit" nillable="true" type="tns:OrganizationalUnit" />
+  <xs:simpleType name="Statics.Result">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Success" />
+      <xs:enumeration value="Error" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Statics.Result" nillable="true" type="tns:Statics.Result" />
+  <xs:complexType name="UserContext">
+    <xs:sequence>
+      <xs:element name="_x003C_DisplayName_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Mail_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Username_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UserContext" nillable="true" type="tns:UserContext" />
+  <xs:complexType name="OperationResult">
+    <xs:sequence>
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Errors_x003E_k__BackingField" nillable="true" type="q5:ArrayOfstring" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Messages_x003E_k__BackingField" nillable="true" type="q6:ArrayOfstring" />
+      <xs:element name="_x003C_ResultAsComputer_x003E_k__BackingField" nillable="true" type="tns:Computer" />
+      <xs:element name="_x003C_ResultAsString_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_ResultAsUser_x003E_k__BackingField" nillable="true" type="tns:User" />
+      <xs:element name="_x003C_Status_x003E_k__BackingField" type="tns:Statics.Result" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OperationResult" nillable="true" type="tns:OperationResult" />
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element name="_x003C_Department_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_DisplayName_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Email_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Username_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="User" nillable="true" type="tns:User" />
+  <xs:complexType name="ArrayOfSoftwareItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SoftwareItem" nillable="true" type="tns:SoftwareItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSoftwareItem" nillable="true" type="tns:ArrayOfSoftwareItem" />
+  <xs:complexType name="SoftwareItem">
+    <xs:sequence>
+      <xs:element name="_x003C_DisplayName_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Group_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_SCCMPackageId_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_SCCMProgram_x003E_k__BackingField" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SoftwareItem" nillable="true" type="tns:SoftwareItem" />
+</xs:schema>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Applications RootDisplayName="Applications">
+    <SelectedApplications>
+        <SelectApplication Application.Id="1" />
+        <SelectApplication Application.Id="2" />
+        <SelectApplication Application.Id="4" />
+    </SelectedApplications>
+    <ApplicationGroup Name="General Software">
+        <Application DisplayName="Sample Application" State="enabled" Id="1" Name="SampleApplication" Guid="ScopeId_0D74AB40-436A-4C3F-8863-FCE1E72EC5CC/Application_9ddd1bdb-4e4c-4315-a752-499c55f778f9">
+            <Setter Property="description"><![CDATA[]]></Setter>
+        </Application>
+    </ApplicationGroup>
+    <ApplicationGroup Name="Basapplikationer">
+        <Application DisplayName="Forefront EndPoint Protection" State="enabled" Id="2">
+            <Setter Property="description" />
+            <Program Architecture="x86" PackageId="ITS00028" PackageName="Forefront EndPoint Protection">Forefront EndPoint Protection_Install</Program>
+            <Program Architecture="amd64" PackageId="ITS00028" PackageName="Forefront EndPoint Protection">Forefront EndPoint Protection_Install</Program>
+            <Dependencies />
+            <Filters />
+            <ApplicationMappings />
+        </Application>
+        <Application DisplayName="7-Zip 9.20" State="enabled" Id="3">
+            <Setter Property="description" />
+            <Program Architecture="amd64" PackageId="ITS0002D" PackageName="7-Zip 9.20">7-Zip x64_Install</Program>
+            <Program Architecture="x86" PackageId="ITS0002D" PackageName="7-Zip 9.20">7-Zip x64_Install</Program>
+            <Dependencies />
+            <Filters />
+            <ApplicationMappings />
+        </Application>
+    </ApplicationGroup>
+    <ApplicationGroup Name="ITS">
+        <Application DisplayName="Rad 7.5 x86" State="enabled" Id="4">
+            <Setter Property="description" />
+            <Program Architecture="amd64" PackageId="ITS000B6" PackageName="RAD 7.5 x86">RAD 7.5_Install</Program>
+            <Program Architecture="x86" PackageId="ITS000B6" PackageName="RAD 7.5 x86">RAD 7.5_Install</Program>
+            <Dependencies />
+            <Filters />
+            <ApplicationMappings />
+        </Application>
+    </ApplicationGroup>
+</Applications>
