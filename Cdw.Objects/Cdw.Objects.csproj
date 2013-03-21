@@ -12,6 +12,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +50,7 @@
     <Compile Include="DeploymentContext.cs" />
     <Compile Include="LanguageItem.cs" />
     <Compile Include="LoginContext.cs" />
+    <Compile Include="OperatingSystemItem.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="OrganizationalUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

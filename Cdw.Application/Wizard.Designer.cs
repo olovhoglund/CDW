@@ -74,6 +74,9 @@
             this.orglist = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.Page_computer = new System.Windows.Forms.TabPage();
+            this.label42 = new System.Windows.Forms.Label();
+            this.prefixpanel = new System.Windows.Forms.Panel();
+            this.prefixlist = new System.Windows.Forms.ComboBox();
             this.namestatuspanel = new System.Windows.Forms.Panel();
             this.namestatuslabel = new System.Windows.Forms.Label();
             this.namestatusimage = new System.Windows.Forms.PictureBox();
@@ -92,6 +95,9 @@
             this.descriptionbox = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.Page_language = new System.Windows.Forms.TabPage();
+            this.label43 = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.oslist = new System.Windows.Forms.ComboBox();
             this.label19 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.languagelist = new System.Windows.Forms.ComboBox();
@@ -149,6 +155,7 @@
             this.grouppanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.Page_computer.SuspendLayout();
+            this.prefixpanel.SuspendLayout();
             this.namestatuspanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.namestatusimage)).BeginInit();
             this.namepanel.SuspendLayout();
@@ -156,6 +163,7 @@
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.Page_language.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.panel3.SuspendLayout();
             this.Page_software.SuspendLayout();
             this.softwarepanel.SuspendLayout();
@@ -266,7 +274,7 @@
             this.lb_start_serialnumber.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_serialnumber.Location = new System.Drawing.Point(27, 113);
             this.lb_start_serialnumber.Name = "lb_start_serialnumber";
-            this.lb_start_serialnumber.Size = new System.Drawing.Size(189, 28);
+            this.lb_start_serialnumber.Size = new System.Drawing.Size(190, 28);
             this.lb_start_serialnumber.TabIndex = 3;
             this.lb_start_serialnumber.Text = "lb_start_serialnumber";
             // 
@@ -276,7 +284,7 @@
             this.lb_start_BIOSGuid.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_BIOSGuid.Location = new System.Drawing.Point(27, 154);
             this.lb_start_BIOSGuid.Name = "lb_start_BIOSGuid";
-            this.lb_start_BIOSGuid.Size = new System.Drawing.Size(160, 28);
+            this.lb_start_BIOSGuid.Size = new System.Drawing.Size(161, 28);
             this.lb_start_BIOSGuid.TabIndex = 3;
             this.lb_start_BIOSGuid.Text = "lb_start_BIOSGuid";
             // 
@@ -286,7 +294,7 @@
             this.lb_start_BIOSVersion.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_BIOSVersion.Location = new System.Drawing.Point(27, 198);
             this.lb_start_BIOSVersion.Name = "lb_start_BIOSVersion";
-            this.lb_start_BIOSVersion.Size = new System.Drawing.Size(184, 28);
+            this.lb_start_BIOSVersion.Size = new System.Drawing.Size(183, 28);
             this.lb_start_BIOSVersion.TabIndex = 3;
             this.lb_start_BIOSVersion.Text = "lb_start_BIOSVersion";
             // 
@@ -316,7 +324,7 @@
             this.lb_start_model.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_model.Location = new System.Drawing.Point(27, 75);
             this.lb_start_model.Name = "lb_start_model";
-            this.lb_start_model.Size = new System.Drawing.Size(132, 28);
+            this.lb_start_model.Size = new System.Drawing.Size(133, 28);
             this.lb_start_model.TabIndex = 3;
             this.lb_start_model.Text = "lb_start_model";
             // 
@@ -336,7 +344,7 @@
             this.lb_start_mac.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_mac.Location = new System.Drawing.Point(362, 75);
             this.lb_start_mac.Name = "lb_start_mac";
-            this.lb_start_mac.Size = new System.Drawing.Size(115, 28);
+            this.lb_start_mac.Size = new System.Drawing.Size(116, 28);
             this.lb_start_mac.TabIndex = 3;
             this.lb_start_mac.Text = "lb_start_mac";
             // 
@@ -346,7 +354,7 @@
             this.lb_start_ip.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_ip.Location = new System.Drawing.Point(364, 38);
             this.lb_start_ip.Name = "lb_start_ip";
-            this.lb_start_ip.Size = new System.Drawing.Size(95, 28);
+            this.lb_start_ip.Size = new System.Drawing.Size(96, 28);
             this.lb_start_ip.TabIndex = 3;
             this.lb_start_ip.Text = "lb_start_ip";
             // 
@@ -356,7 +364,7 @@
             this.lb_start_manufacturer.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_manufacturer.Location = new System.Drawing.Point(28, 38);
             this.lb_start_manufacturer.Name = "lb_start_manufacturer";
-            this.lb_start_manufacturer.Size = new System.Drawing.Size(194, 28);
+            this.lb_start_manufacturer.Size = new System.Drawing.Size(195, 28);
             this.lb_start_manufacturer.TabIndex = 3;
             this.lb_start_manufacturer.Text = "lb_start_manufacturer";
             // 
@@ -396,7 +404,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(6, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(164, 21);
+            this.label3.Size = new System.Drawing.Size(163, 21);
             this.label3.TabIndex = 2;
             this.label3.Text = "COMPUTER DETAILS";
             // 
@@ -492,7 +500,7 @@
             this.lb_owner_department.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_owner_department.Location = new System.Drawing.Point(3, 47);
             this.lb_owner_department.Name = "lb_owner_department";
-            this.lb_owner_department.Size = new System.Drawing.Size(194, 28);
+            this.lb_owner_department.Size = new System.Drawing.Size(195, 28);
             this.lb_owner_department.TabIndex = 5;
             this.lb_owner_department.Text = "lb_owner_department";
             // 
@@ -612,7 +620,7 @@
             this.label17.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label17.Location = new System.Drawing.Point(3, 13);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(143, 19);
+            this.label17.Size = new System.Drawing.Size(141, 19);
             this.label17.TabIndex = 1;
             this.label17.Text = "AVAILABLE GROUPS";
             // 
@@ -659,6 +667,8 @@
             // 
             // Page_computer
             // 
+            this.Page_computer.Controls.Add(this.label42);
+            this.Page_computer.Controls.Add(this.prefixpanel);
             this.Page_computer.Controls.Add(this.namestatuspanel);
             this.Page_computer.Controls.Add(this.check_computername);
             this.Page_computer.Controls.Add(this.label40);
@@ -677,6 +687,36 @@
             this.Page_computer.TabIndex = 4;
             this.Page_computer.Text = "Page_computer";
             this.Page_computer.UseVisualStyleBackColor = true;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(7, 129);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(149, 13);
+            this.label42.TabIndex = 15;
+            this.label42.Text = "Select computername prefix";
+            // 
+            // prefixpanel
+            // 
+            this.prefixpanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.prefixpanel.Controls.Add(this.prefixlist);
+            this.prefixpanel.Location = new System.Drawing.Point(10, 145);
+            this.prefixpanel.Name = "prefixpanel";
+            this.prefixpanel.Size = new System.Drawing.Size(273, 32);
+            this.prefixpanel.TabIndex = 14;
+            // 
+            // prefixlist
+            // 
+            this.prefixlist.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.prefixlist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.prefixlist.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prefixlist.FormattingEnabled = true;
+            this.prefixlist.Location = new System.Drawing.Point(3, 4);
+            this.prefixlist.Name = "prefixlist";
+            this.prefixlist.Size = new System.Drawing.Size(264, 23);
+            this.prefixlist.TabIndex = 1;
+            this.prefixlist.SelectedIndexChanged += new System.EventHandler(this.prefixlist_selectedIndexChanged);
             // 
             // namestatuspanel
             // 
@@ -748,7 +788,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(7, 247);
+            this.label23.Location = new System.Drawing.Point(303, 247);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(149, 13);
             this.label23.TabIndex = 8;
@@ -757,7 +797,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(7, 186);
+            this.label22.Location = new System.Drawing.Point(7, 246);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(131, 13);
             this.label22.TabIndex = 8;
@@ -767,7 +807,7 @@
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.departmentbox);
-            this.panel6.Location = new System.Drawing.Point(10, 263);
+            this.panel6.Location = new System.Drawing.Point(306, 263);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(273, 32);
             this.panel6.TabIndex = 3;
@@ -785,7 +825,7 @@
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.locationbox);
-            this.panel5.Location = new System.Drawing.Point(10, 202);
+            this.panel5.Location = new System.Drawing.Point(10, 262);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(273, 32);
             this.panel5.TabIndex = 2;
@@ -802,7 +842,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(7, 127);
+            this.label21.Location = new System.Drawing.Point(7, 187);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(147, 13);
             this.label21.TabIndex = 8;
@@ -812,7 +852,7 @@
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.descriptionbox);
-            this.panel4.Location = new System.Drawing.Point(10, 143);
+            this.panel4.Location = new System.Drawing.Point(10, 203);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(273, 32);
             this.panel4.TabIndex = 1;
@@ -840,6 +880,8 @@
             // 
             // Page_language
             // 
+            this.Page_language.Controls.Add(this.label43);
+            this.Page_language.Controls.Add(this.panel8);
             this.Page_language.Controls.Add(this.label19);
             this.Page_language.Controls.Add(this.panel3);
             this.Page_language.Controls.Add(this.label18);
@@ -851,10 +893,39 @@
             this.Page_language.Text = "Page_language";
             this.Page_language.UseVisualStyleBackColor = true;
             // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(7, 43);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(128, 13);
+            this.label43.TabIndex = 10;
+            this.label43.Text = "Select operating system";
+            // 
+            // panel8
+            // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.oslist);
+            this.panel8.Location = new System.Drawing.Point(10, 59);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(273, 32);
+            this.panel8.TabIndex = 11;
+            // 
+            // oslist
+            // 
+            this.oslist.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.oslist.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.oslist.FormattingEnabled = true;
+            this.oslist.Location = new System.Drawing.Point(4, 4);
+            this.oslist.Name = "oslist";
+            this.oslist.Size = new System.Drawing.Size(264, 23);
+            this.oslist.TabIndex = 0;
+            this.oslist.SelectedIndexChanged += new System.EventHandler(this.oslist_selectedIndexChanged);
+            // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(7, 43);
+            this.label19.Location = new System.Drawing.Point(7, 106);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(180, 13);
             this.label19.TabIndex = 8;
@@ -864,7 +935,7 @@
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.languagelist);
-            this.panel3.Location = new System.Drawing.Point(10, 59);
+            this.panel3.Location = new System.Drawing.Point(10, 122);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(273, 32);
             this.panel3.TabIndex = 9;
@@ -890,7 +961,7 @@
             this.label18.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.label18.Size = new System.Drawing.Size(657, 29);
             this.label18.TabIndex = 5;
-            this.label18.Text = "STEP 4 - LANGUAGE";
+            this.label18.Text = "STEP 4 - OPERATING SYSTEM";
             // 
             // Page_software
             // 
@@ -971,7 +1042,7 @@
             this.label26.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label26.Location = new System.Drawing.Point(8, 45);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(160, 19);
+            this.label26.Size = new System.Drawing.Size(158, 19);
             this.label26.TabIndex = 8;
             this.label26.Text = "AVAILABLE SOFTWARE";
             // 
@@ -1188,7 +1259,7 @@
             this.label37.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label37.Location = new System.Drawing.Point(13, 128);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(145, 19);
+            this.label37.Size = new System.Drawing.Size(144, 19);
             this.label37.TabIndex = 9;
             this.label37.Text = "OPERATING SYSTEM";
             // 
@@ -1350,6 +1421,7 @@
             this.panel2.ResumeLayout(false);
             this.Page_computer.ResumeLayout(false);
             this.Page_computer.PerformLayout();
+            this.prefixpanel.ResumeLayout(false);
             this.namestatuspanel.ResumeLayout(false);
             this.namestatuspanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.namestatusimage)).EndInit();
@@ -1363,6 +1435,7 @@
             this.panel4.PerformLayout();
             this.Page_language.ResumeLayout(false);
             this.Page_language.PerformLayout();
+            this.panel8.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.Page_software.ResumeLayout(false);
             this.Page_software.PerformLayout();
@@ -1496,6 +1569,12 @@
         private System.Windows.Forms.Label namecreatedlabel;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Panel prefixpanel;
+        private System.Windows.Forms.ComboBox prefixlist;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.ComboBox oslist;
     }
 }
 

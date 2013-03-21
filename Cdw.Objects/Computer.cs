@@ -21,6 +21,7 @@ namespace Cdw.Objects
         public string Name { get; set; }
         public string Location { get; set; }
         public LanguageItem Language { get; set; }
+        public OperatingSystemItem OperatingSystem { get; set; }
         public string OrganizationalUnit { get; set; }
         public List<String> Groups { get; set; }
         public string BiosGuid { get; set; }

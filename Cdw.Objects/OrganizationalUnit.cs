@@ -11,12 +11,13 @@ namespace Cdw.Objects
     {
         public string DistinguishedName { get; set; }
         public string DisplayName { get; set; }
-        public string ComputerNamePrefix { get; set; }
+        public List<String> ComputerNamePrefixes { get; set; }
         public List<String> Groups { get; set; }
 
         public OrganizationalUnit()
         {
             Groups = new List<string>();
+            ComputerNamePrefixes = new List<string>();
         }
     }
 }

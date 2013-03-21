@@ -25,6 +25,14 @@ namespace Cdw.App
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            try
+            {
+                SCCMEnvironment.CloseUIProgressDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             Application.Run(new Splash());
         }
     }

@@ -54,12 +54,15 @@ namespace Cdw.Service
                         // check if user has access
                         foreach (XmlNode userNode in ouNode.SelectNodes("Users/User"))
                         {
-                            if (userNode.InnerText.Equals(request.Username))
+                            if (userNode.InnerText.ToLower().Trim() == request.Username.ToLower().Trim())
                             {
                                 var ou = new OrganizationalUnit();
                                 ou.DisplayName = ouNode.SelectNodes("DisplayName")[0].InnerText;
                                 ou.DistinguishedName = ouNode.SelectNodes("DistinguishedName")[0].InnerText;
-                                ou.ComputerNamePrefix = ouNode.SelectNodes("ComputerNamePrefix")[0].InnerText;
+                                foreach (XmlNode prefixNode in ouNode.SelectNodes("ComputerNamePrefixes/Prefix"))
+                                {
+                                    ou.ComputerNamePrefixes.Add(prefixNode.InnerText);
+                                }
                                 foreach (XmlNode groupNode in ouNode.SelectNodes("Groups/Group"))
                                 {
                                     ou.Groups.Add(groupNode.InnerText);
@@ -86,7 +89,7 @@ namespace Cdw.Service
             catch (Exception ex)
             {
                 Response.Result = Statics.Result.Error;
-                Response.Errors.Add(ex.Message);
+                Response.Errors.Add(ex.Message + ex.StackTrace);
             }
             return Response;
         }

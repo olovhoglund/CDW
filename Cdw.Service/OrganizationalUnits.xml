@@ -2,7 +2,9 @@
 <OrganizationalUnits>
     <OrganizationalUnit>
         <DistinguishedName>CN=Computers,DC=Testad,DC=local</DistinguishedName>
-        <ComputerNamePrefix>COMP</ComputerNamePrefix>
+        <ComputerNamePrefixes>
+            <Prefix>C1</Prefix>
+          </ComputerNamePrefixes>
         <DisplayName>Computers</DisplayName>
         <Users>
             <User>user01</User>

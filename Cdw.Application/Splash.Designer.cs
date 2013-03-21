@@ -121,8 +121,12 @@
             // 
             // retrybutton
             // 
-            this.retrybutton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.retrybutton.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.retrybutton.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.retrybutton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.retrybutton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.retrybutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.retrybutton.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.retrybutton.Location = new System.Drawing.Point(508, 345);
             this.retrybutton.Name = "retrybutton";
             this.retrybutton.Size = new System.Drawing.Size(111, 33);

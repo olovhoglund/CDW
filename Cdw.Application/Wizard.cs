@@ -63,6 +63,17 @@ namespace Cdw.App
             {
                 orglist.Items.Add(ou);
             }
+            var OSWin7 = new OperatingSystemItem();
+            var OSWin8 = new OperatingSystemItem();
+            OSWin7.OSName = "Windows7";
+            OSWin7.OSDescription = "Microsoft Windows 7 Enterprise";
+            OSWin8.OSName = "Windows8";
+            OSWin8.OSDescription = "Microsoft Windows 8 Enterprise";
+            oslist.DisplayMember = "OSDescription";
+            oslist.Items.Add(OSWin7);
+            oslist.Items.Add(OSWin8);
+            oslist.SelectedItem = OSWin7;
+            Program.Computer.OperatingSystem = OSWin8;
             var langSv = new LanguageItem();
             var langEng = new LanguageItem();
             langSv.LanguageCode = "sv-SE";
@@ -73,6 +84,7 @@ namespace Cdw.App
             languagelist.Items.Add(langSv);
             languagelist.Items.Add(langEng);
             languagelist.SelectedItem = langSv;
+            Program.Computer.Language = langSv;
             ownersearchpanel.Visible = false;
             softwarepanel.Visible = false;
             statuspanel.Visible = false;
@@ -191,6 +203,11 @@ namespace Cdw.App
                     Program.Computer.Description = descriptionbox.Text;
                     Program.Computer.Location = locationbox.Text;
                     Program.Computer.Department = departmentbox.Text;
+                    // if nothing in the UI has been changed - better safe than sorry
+                    if (check_computername.Checked)
+                    {
+                        Program.Computer.Prefix = prefixlist.SelectedItem.ToString();
+                    }
                     MyWizard.SelectedTab = Page_language;
                     break;
                 case "page_language":
@@ -255,11 +272,22 @@ namespace Cdw.App
                 namebox.Text = "";
                 nextbutton.Enabled = true;
                 Program.Computer.Name = "";
+                if (prefixlist.SelectedItem != null)
+                {
+                    Program.Computer.Prefix = prefixlist.SelectedItem.ToString();
+                }
+                prefixpanel.BackColor = Color.Transparent;
+                prefixlist.BackColor = Color.White;
+                prefixlist.Enabled = true;
+
             }
             else
             {
                 namepanel.BackColor = Color.Transparent;
                 namebox.BackColor = Color.White;
+                prefixpanel.BackColor = Color.LightGray;
+                prefixlist.BackColor = Color.LightGray;
+                prefixlist.Enabled = false;
                 namebox.Enabled = true;
                 nextbutton.Enabled = false;
             }
@@ -409,13 +437,28 @@ namespace Cdw.App
                 }
             }
             Program.Computer.OrganizationalUnit = selectedOu.DistinguishedName;
-            Program.Computer.Prefix = selectedOu.ComputerNamePrefix;
+            //Program.Computer.Prefix = selectedOu.ComputerNamePrefix;
+            prefixlist.SelectedText = "";
+            Refresh_Prefixes(selectedOu);
             nextbutton.Enabled = true;
         }
 
         private void SoftwareList_ItemSelected(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             e.Item.Selected = false;
+        }
+
+        private void Refresh_Prefixes(OrganizationalUnit item)
+        {
+            prefixlist.Items.Clear();
+            foreach(string prefix in item.ComputerNamePrefixes)
+            {
+                prefixlist.Items.Add(prefix);
+            }
+            if (item.ComputerNamePrefixes.Count > 0)
+            {
+                prefixlist.SelectedItem = item.ComputerNamePrefixes[0];
+            }
         }
 
         private void Refresh_Summary()
@@ -511,6 +554,8 @@ namespace Cdw.App
                     var item = (SoftwareItem)softwarelist.CheckedItems[i].Tag;
                     SCCMEnvironment.SetVariable(getPaddedString("PACKAGE", i + 1), item.SCCMPackageId + ":" + item.SCCMProgram);
                 }
+                // os
+                SCCMEnvironment.SetVariable("CDWOperatingSystem", Program.Computer.OperatingSystem.OSName);
                 // os language
                 SCCMEnvironment.SetVariable("OSDLanguage", Program.Computer.Language.LanguageCode);
                 // email to technician
@@ -543,6 +588,17 @@ namespace Cdw.App
             loadingpanel.Visible = false;
             statuspanel.Visible = true;
             statuslabel.Text = lastError;
+        }
+
+        private void prefixlist_selectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.Computer.Prefix = prefixlist.SelectedItem.ToString();
+        }
+
+        private void oslist_selectedIndexChanged(object sender, EventArgs e)
+        {
+            Program.Computer.OperatingSystem = (OperatingSystemItem)oslist.SelectedItem;
+            nextbutton.Enabled = true;
         }
 
        
