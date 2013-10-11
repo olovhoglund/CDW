@@ -73,7 +73,7 @@ namespace Cdw.App
             oslist.Items.Add(OSWin7);
             oslist.Items.Add(OSWin8);
             oslist.SelectedItem = OSWin7;
-            Program.Computer.OperatingSystem = OSWin8;
+            Program.Computer.OperatingSystem = OSWin7;
             var langSv = new LanguageItem();
             var langEng = new LanguageItem();
             langSv.LanguageCode = "sv-SE";
@@ -94,6 +94,7 @@ namespace Cdw.App
             namepanel.BackColor = Color.LightGray;
             namebox.BackColor = Color.LightGray;
             namebox.Enabled = false;
+            lbCompNameError.Visible = false;
             computercreatedpanel.Visible = false;
             namecreatedlabel.Visible = false;
             if (Program.DeploymentContext.ForceGeneratedName)
@@ -131,6 +132,7 @@ namespace Cdw.App
                     {
                         nextbutton.Enabled = false;
                     }
+                    ownersearchbox.Focus();
                     break;
                 case "page_organization":
                     backbutton.Visible = true;
@@ -270,6 +272,7 @@ namespace Cdw.App
                 namebox.BackColor = Color.LightGray;
                 namebox.Enabled = false;
                 namebox.Text = "";
+                lbCompNameError.Visible = false;
                 nextbutton.Enabled = true;
                 Program.Computer.Name = "";
                 if (prefixlist.SelectedItem != null)
@@ -283,12 +286,15 @@ namespace Cdw.App
             }
             else
             {
+                Program.Computer.Prefix = "";
                 namepanel.BackColor = Color.Transparent;
                 namebox.BackColor = Color.White;
                 prefixpanel.BackColor = Color.LightGray;
                 prefixlist.BackColor = Color.LightGray;
                 prefixlist.Enabled = false;
                 namebox.Enabled = true;
+                namebox.Focus();
+                lbCompNameError.Visible = false;
                 nextbutton.Enabled = false;
             }
         }
@@ -300,6 +306,18 @@ namespace Cdw.App
 
         private void Namebox_Leave(object sender, EventArgs e)
         {
+            // Check  Maximum length = 14
+            if (namebox.Text.Length > 14)
+            {
+                lbCompNameError.Text = "Current length is " + namebox.Text.Length + ", maximum is 14.";
+                lbCompNameError.Visible = true;
+                return;
+            }
+            else
+            {
+                lbCompNameError.Visible= false;
+            }
+
             if ((namebox.Text.Length > 0) && (namebox.Text.ToUpper() != Program.Computer.Name.ToUpper()))
             {
                 namestatuspanel.Visible = true;
@@ -331,6 +349,7 @@ namespace Cdw.App
             else
             {
                 MessageBox.Show(string.Concat(e.Result.Errors.ToArray()), "Search error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                namestatusimage.Image = global::Cdw.App.Properties.Resources.error_shield_small;
                 nextbutton.Enabled = false;
             }
         }
@@ -408,7 +427,16 @@ namespace Cdw.App
                         listitem.Text = item.DisplayName;
                         listitem.Tag = item;
                         listitem.SubItems.Add(item.SCCMPackageId);
-                        listitem.SubItems.Add(item.SCCMProgram);
+
+                        if (item.SCCMInstallationType == InstallationType.Application)
+                        {
+                            listitem.SubItems.Add(item.SCCMName);
+                        }
+                        else
+                        {
+                            listitem.SubItems.Add(item.SCCMProgram);
+                        }
+
                         listitem.Group = grp;
                         listitem.Checked = item.Selected;
                         softwarelist.Items.Add(listitem);
@@ -424,6 +452,7 @@ namespace Cdw.App
             grouppanel.Visible = true;
             // build the group list for that organizzational unit.
             grouplist.Items.Clear();
+            Program.Computer.Groups.Clear();
             var selectedOu = (OrganizationalUnit)orglist.SelectedItem;
             foreach (OrganizationalUnit ou in Program.DeploymentContext.OrganizationalUnits)
             {
@@ -464,22 +493,51 @@ namespace Cdw.App
         private void Refresh_Summary()
         {
             // this is not a time consuming task, so it can be done every time.
-            lb_summary_owner.Text = Program.Computer.Owner;
-            lb_summary_department.Text = Program.Computer.Department;
-            lb_summary_description.Text = Program.Computer.Description;
-            lb_summary_location.Text = Program.Computer.Location;
-            lb_summary_language.Text = Program.Computer.Language.LanguageName + " (" + Program.Computer.Language.LanguageCode + ")";
-            lb_summary_ou.Text = Program.Computer.OrganizationalUnit;
-            lb_summary_software.Text = "";
-            lb_summary_group.Text = "";
-            foreach (ListViewItem item in softwarelist.CheckedItems)
-            {
-                lb_summary_software.Text = lb_summary_software.Text + item.Text + Environment.NewLine;
-            }
-            foreach (ListViewItem grp in grouplist.CheckedItems)
-            {
-                lb_summary_group.Text = lb_summary_group.Text + grp.Text + Environment.NewLine;
-            }
+
+            listViewSummary.Items.Clear();
+
+            AddToListViewSummary("COMPUTER", "");
+
+            AddToListViewSummary("Owner:", Program.Computer.Owner);
+            AddToListViewSummary("Oranizational unit:", Program.Computer.OrganizationalUnit);
+
+            string attr = "Member of group:";
+            string val = "";
+            if (grouplist.CheckedItems.Count > 0)
+                val = grouplist.CheckedItems[0].Text;
+            AddToListViewSummary(attr, val);
+            for (int i = 1; i < grouplist.CheckedItems.Count; i++)
+                AddToListViewSummary("", grouplist.CheckedItems[i].Text);
+
+            if (Program.Computer.Name != "")
+                AddToListViewSummary("Computer Name:", Program.Computer.Name);
+            else if (Program.Computer.Prefix != "")
+                AddToListViewSummary("Computer Prefix:", Program.Computer.Prefix);
+
+            AddToListViewSummary("Description:", Program.Computer.Description);
+            AddToListViewSummary("Location:", Program.Computer.Location);
+            AddToListViewSummary("Department:", Program.Computer.Department);
+
+            AddToListViewSummary("", "");
+            AddToListViewSummary("OPERATING SYSTEM", "");
+
+            AddToListViewSummary("Language:", Program.Computer.Language.LanguageName + " (" + Program.Computer.Language.LanguageCode + ")");
+
+            attr = "Software:";
+            val = "";
+            if (softwarelist.CheckedItems.Count > 0)
+                val = softwarelist.CheckedItems[0].Text;
+            AddToListViewSummary(attr, val);
+            for (int i = 1; i < softwarelist.CheckedItems.Count; i++)
+                AddToListViewSummary("", softwarelist.CheckedItems[i].Text);
+
+            
+        }
+
+        private void AddToListViewSummary(string attr, string val)
+        {
+            var itm = new ListViewItem(new[] { attr, val });
+            listViewSummary.Items.Add(itm);
         }
 
         private void Finish(object state)
@@ -538,9 +596,9 @@ namespace Cdw.App
             nextbutton.Text = "OK";
         }
 
-        private string getPaddedString(string baseVariable, int sequence)
+        private string getPaddedString(string baseVariable, int sequence, int length)
         {
-            return baseVariable + sequence.ToString().PadLeft(3, '0');
+            return baseVariable + sequence.ToString().PadLeft(length, '0');
         }
 
         private void SetSCCMVariables(object state)
@@ -548,16 +606,35 @@ namespace Cdw.App
             SynchronizationContext uiContext = state as SynchronizationContext;
             try
             {
-                // software packages
-                for (int i = 0; i < softwarelist.CheckedItems.Count - 1; i++)
+                // computer name
+                SCCMEnvironment.SetVariable("OSDComputerName", Program.Computer.Name);
+
+                // Application and software packages
+                int applicationId = 0;
+                int packageId = 0;
+
+                for (int i = 0; i <= softwarelist.CheckedItems.Count - 1; i++)
                 {
                     var item = (SoftwareItem)softwarelist.CheckedItems[i].Tag;
-                    SCCMEnvironment.SetVariable(getPaddedString("PACKAGE", i + 1), item.SCCMPackageId + ":" + item.SCCMProgram);
+                    if (item.SCCMInstallationType == InstallationType.Application)
+                    {
+                        SCCMEnvironment.SetVariable(getPaddedString("APPLICATION", applicationId + 1, 2), item.SCCMName);
+                        applicationId += 1;
+                    }
+                    else if (item.SCCMInstallationType == InstallationType.Package) 
+                    {
+                        SCCMEnvironment.SetVariable(getPaddedString("PACKAGE", packageId + 1, 3), item.SCCMPackageId + ":" + item.SCCMProgram);
+                        packageId += 1;
+                    }
+                    else
+                    {
+                        throw new ApplicationException("Illegal Installation type, not Application or Package.");
+                    }
                 }
                 // os
                 SCCMEnvironment.SetVariable("CDWOperatingSystem", Program.Computer.OperatingSystem.OSName);
                 // os language
-                SCCMEnvironment.SetVariable("OSDLanguage", Program.Computer.Language.LanguageCode);
+                SCCMEnvironment.SetVariable("OSDUILanguage", Program.Computer.Language.LanguageCode);
                 // email to technician
                 if (Program.User.Mail.Length > 0)
                 {
@@ -599,6 +676,35 @@ namespace Cdw.App
         {
             Program.Computer.OperatingSystem = (OperatingSystemItem)oslist.SelectedItem;
             nextbutton.Enabled = true;
+        }
+
+
+        private void grouplist_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void grouplist_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+
+        }
+
+        private void grouplist_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            if (e.Item.Checked)
+            {
+                if (!Program.Computer.Groups.Contains(e.Item.Text))
+                {
+                    Program.Computer.Groups.Add(e.Item.Text);
+                }
+            }
+            else
+            {
+                if (Program.Computer.Groups.Contains(e.Item.Text))
+                {
+                    Program.Computer.Groups.Remove(e.Item.Text);
+                }
+            }
         }
 
        

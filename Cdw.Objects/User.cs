@@ -12,5 +12,6 @@ namespace Cdw.Objects
         public string DisplayName { get; set; }
         public string Department { get; set; }
         public string Email { get; set; }
+        public List<string> MemberOf { get; set; }
     }
 }

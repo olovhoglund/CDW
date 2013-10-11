@@ -1,41 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Replace the contents of this file with the contents of the .app file from the UDI Wizard designer if you are using SCCM applications.
+Settings for packages are included in the xml file from the UDI wizard designer-->
 <Applications RootDisplayName="Applications">
     <SelectedApplications>
         <SelectApplication Application.Id="1" />
         <SelectApplication Application.Id="2" />
-        <SelectApplication Application.Id="4" />
     </SelectedApplications>
-    <ApplicationGroup Name="General Software">
-        <Application DisplayName="Sample Application" State="enabled" Id="1" Name="SampleApplication" Guid="ScopeId_0D74AB40-436A-4C3F-8863-FCE1E72EC5CC/Application_9ddd1bdb-4e4c-4315-a752-499c55f778f9">
-            <Setter Property="description"><![CDATA[]]></Setter>
-        </Application>
-    </ApplicationGroup>
-    <ApplicationGroup Name="Basapplikationer">
-        <Application DisplayName="Forefront EndPoint Protection" State="enabled" Id="2">
+    <ApplicationGroup Name="Test Packages">
+        <Application DisplayName="WKS 7-Zip 9.20 test package" State="enabled" Id="1">
             <Setter Property="description" />
-            <Program Architecture="x86" PackageId="ITS00028" PackageName="Forefront EndPoint Protection">Forefront EndPoint Protection_Install</Program>
-            <Program Architecture="amd64" PackageId="ITS00028" PackageName="Forefront EndPoint Protection">Forefront EndPoint Protection_Install</Program>
-            <Dependencies />
-            <Filters />
-            <ApplicationMappings />
-        </Application>
-        <Application DisplayName="7-Zip 9.20" State="enabled" Id="3">
-            <Setter Property="description" />
-            <Program Architecture="amd64" PackageId="ITS0002D" PackageName="7-Zip 9.20">7-Zip x64_Install</Program>
-            <Program Architecture="x86" PackageId="ITS0002D" PackageName="7-Zip 9.20">7-Zip x64_Install</Program>
+            <Program Architecture="amd64" PackageId="ITS0002D" PackageName="WKS 7-Zip 9.20">7-Zip x64_Install</Program>
             <Dependencies />
             <Filters />
             <ApplicationMappings />
         </Application>
     </ApplicationGroup>
-    <ApplicationGroup Name="ITS">
-        <Application DisplayName="Rad 7.5 x86" State="enabled" Id="4">
+    <ApplicationGroup Name="Test Applications">
+        <Application DisplayName="Sourceforge 7-zip 9.20 x64 Eng WKS test application" State="enabled" Id="2" Name="Sourceforge 7-zip 9.20 x64 Eng WKS" Guid="ScopeId_A5C72BB8-BF73-46EA-A7D1-1C7C48BAD442/Application_409ea09f-00ad-4d07-b542-ff86f3b7ca97">
             <Setter Property="description" />
-            <Program Architecture="amd64" PackageId="ITS000B6" PackageName="RAD 7.5 x86">RAD 7.5_Install</Program>
-            <Program Architecture="x86" PackageId="ITS000B6" PackageName="RAD 7.5 x86">RAD 7.5_Install</Program>
             <Dependencies />
             <Filters />
-            <ApplicationMappings />
+            <ApplicationMappings>
+                <Match Type="WMI" OperatorCondition="OR" DisplayName="Sourceforge 7-zip 9.20 x64 Eng WKS">
+                    <Setter Property="Name">Sourceforge 7-zip 9.20 x64 Eng WKS</Setter>
+                </Match>
+                <Match Type="MSI" OperatorCondition="OR" DisplayName="Sourceforge 7-zip 9.20 x64 Eng WKS">
+                    <Setter Property="ProductId"></Setter>
+                </Match>
+            </ApplicationMappings>
         </Application>
     </ApplicationGroup>
 </Applications>

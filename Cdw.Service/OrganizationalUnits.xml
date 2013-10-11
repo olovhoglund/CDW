@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <OrganizationalUnits>
     <OrganizationalUnit>
-        <DistinguishedName>CN=Computers,DC=Testad,DC=local</DistinguishedName>
-        <ComputerNamePrefixes>
+        <DistinguishedName>CN=Computers,DC=Domain,DC=local</DistinguishedName>
+          <ComputerNamePrefixes>
             <Prefix>C1</Prefix>
           </ComputerNamePrefixes>
         <DisplayName>Computers</DisplayName>
-        <Users>
-            <User>user01</User>
-        </Users>
+        <AllowedGroups>
+            <Group>staff.xxxxxxxx</Group>
+        </AllowedGroups>
         <Groups>
             <Group>Group 1</Group>
             <Group>Group 2</Group>
@@ -20,4 +20,25 @@
             <Group>Group 8</Group>
         </Groups>
     </OrganizationalUnit>
+  <OrganizationalUnit>
+    <DistinguishedName>CN=Computers2,DC=Domain,DC=local</DistinguishedName>
+    <ComputerNamePrefixes>
+      <Prefix>COMP1</Prefix>
+      <Prefix>COMP2</Prefix>
+    </ComputerNamePrefixes>
+    <DisplayName>Computers2</DisplayName>
+      <AllowedGroups>
+          <Group>staff.xxxxxxxx</Group>
+    </AllowedGroups>
+    <Groups>
+      <Group>Group 1</Group>
+      <Group>Group 2</Group>
+      <Group>Group 3</Group>
+      <Group>Group 4</Group>
+      <Group>Group 5</Group>
+      <Group>Group 6</Group>
+      <Group>Group 7</Group>
+      <Group>Group 8</Group>
+    </Groups>
+  </OrganizationalUnit>
 </OrganizationalUnits>

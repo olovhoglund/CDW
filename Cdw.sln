@@ -10,8 +10,32 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cdw.Testapplication", "Cdw.Testapplication\Cdw.Testapplication.csproj", "{ED1D6CBC-5AD0-4DA3-A713-CDBFADA81215}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cdw.App", "Cdw.Application\Cdw.App.csproj", "{8FF9EEBB-DD73-42CE-A3AC-F5289319BD4C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3F8FE72-6FE6-452A-AED9-B6E71580CDB8} = {A3F8FE72-6FE6-452A-AED9-B6E71580CDB8}
+	EndProjectSection
 EndProject
 Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://its-tfs01.ad.umu.se/tfs/root
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Cdw.Objects\\Cdw.Objects.csproj
+		SccProjectName1 = Cdw.Objects
+		SccLocalPath1 = Cdw.Objects
+		SccProjectUniqueName2 = Cdw.Service\\Cdw.Service.csproj
+		SccProjectName2 = Cdw.Service
+		SccLocalPath2 = Cdw.Service
+		SccProjectUniqueName3 = Cdw.Powershell\\Cdw.Powershell.csproj
+		SccProjectName3 = Cdw.Powershell
+		SccLocalPath3 = Cdw.Powershell
+		SccProjectUniqueName4 = Cdw.Testapplication\\Cdw.Testapplication.csproj
+		SccProjectName4 = Cdw.Testapplication
+		SccLocalPath4 = Cdw.Testapplication
+		SccProjectUniqueName5 = Cdw.Application\\Cdw.App.csproj
+		SccProjectName5 = Cdw.Application
+		SccLocalPath5 = Cdw.Application
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

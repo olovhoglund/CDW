@@ -74,6 +74,7 @@
             this.orglist = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.Page_computer = new System.Windows.Forms.TabPage();
+            this.lbCompNameError = new System.Windows.Forms.Label();
             this.label42 = new System.Windows.Forms.Label();
             this.prefixpanel = new System.Windows.Forms.Panel();
             this.prefixlist = new System.Windows.Forms.ComboBox();
@@ -114,24 +115,9 @@
             this.label24 = new System.Windows.Forms.Label();
             this.Page_summary = new System.Windows.Forms.TabPage();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.label30 = new System.Windows.Forms.Label();
-            this.lb_summary_software = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.lb_summary_language = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.lb_summary_department = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.lb_summary_location = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.lb_summary_description = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.lb_summary_group = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.lb_summary_owner = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.lb_summary_ou = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
+            this.listViewSummary = new System.Windows.Forms.ListView();
+            this.Attribute = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label28 = new System.Windows.Forms.Label();
             this.Finished = new System.Windows.Forms.TabPage();
             this.computercreatedpanel = new System.Windows.Forms.Panel();
@@ -274,7 +260,7 @@
             this.lb_start_serialnumber.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_serialnumber.Location = new System.Drawing.Point(27, 113);
             this.lb_start_serialnumber.Name = "lb_start_serialnumber";
-            this.lb_start_serialnumber.Size = new System.Drawing.Size(190, 28);
+            this.lb_start_serialnumber.Size = new System.Drawing.Size(189, 28);
             this.lb_start_serialnumber.TabIndex = 3;
             this.lb_start_serialnumber.Text = "lb_start_serialnumber";
             // 
@@ -284,7 +270,7 @@
             this.lb_start_BIOSGuid.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_BIOSGuid.Location = new System.Drawing.Point(27, 154);
             this.lb_start_BIOSGuid.Name = "lb_start_BIOSGuid";
-            this.lb_start_BIOSGuid.Size = new System.Drawing.Size(161, 28);
+            this.lb_start_BIOSGuid.Size = new System.Drawing.Size(160, 28);
             this.lb_start_BIOSGuid.TabIndex = 3;
             this.lb_start_BIOSGuid.Text = "lb_start_BIOSGuid";
             // 
@@ -294,7 +280,7 @@
             this.lb_start_BIOSVersion.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_BIOSVersion.Location = new System.Drawing.Point(27, 198);
             this.lb_start_BIOSVersion.Name = "lb_start_BIOSVersion";
-            this.lb_start_BIOSVersion.Size = new System.Drawing.Size(183, 28);
+            this.lb_start_BIOSVersion.Size = new System.Drawing.Size(184, 28);
             this.lb_start_BIOSVersion.TabIndex = 3;
             this.lb_start_BIOSVersion.Text = "lb_start_BIOSVersion";
             // 
@@ -324,7 +310,7 @@
             this.lb_start_model.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_model.Location = new System.Drawing.Point(27, 75);
             this.lb_start_model.Name = "lb_start_model";
-            this.lb_start_model.Size = new System.Drawing.Size(133, 28);
+            this.lb_start_model.Size = new System.Drawing.Size(132, 28);
             this.lb_start_model.TabIndex = 3;
             this.lb_start_model.Text = "lb_start_model";
             // 
@@ -344,7 +330,7 @@
             this.lb_start_mac.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_mac.Location = new System.Drawing.Point(362, 75);
             this.lb_start_mac.Name = "lb_start_mac";
-            this.lb_start_mac.Size = new System.Drawing.Size(116, 28);
+            this.lb_start_mac.Size = new System.Drawing.Size(115, 28);
             this.lb_start_mac.TabIndex = 3;
             this.lb_start_mac.Text = "lb_start_mac";
             // 
@@ -354,7 +340,7 @@
             this.lb_start_ip.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_ip.Location = new System.Drawing.Point(364, 38);
             this.lb_start_ip.Name = "lb_start_ip";
-            this.lb_start_ip.Size = new System.Drawing.Size(96, 28);
+            this.lb_start_ip.Size = new System.Drawing.Size(95, 28);
             this.lb_start_ip.TabIndex = 3;
             this.lb_start_ip.Text = "lb_start_ip";
             // 
@@ -364,7 +350,7 @@
             this.lb_start_manufacturer.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_start_manufacturer.Location = new System.Drawing.Point(28, 38);
             this.lb_start_manufacturer.Name = "lb_start_manufacturer";
-            this.lb_start_manufacturer.Size = new System.Drawing.Size(195, 28);
+            this.lb_start_manufacturer.Size = new System.Drawing.Size(194, 28);
             this.lb_start_manufacturer.TabIndex = 3;
             this.lb_start_manufacturer.Text = "lb_start_manufacturer";
             // 
@@ -404,7 +390,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(6, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(163, 21);
+            this.label3.Size = new System.Drawing.Size(164, 21);
             this.label3.TabIndex = 2;
             this.label3.Text = "COMPUTER DETAILS";
             // 
@@ -500,7 +486,7 @@
             this.lb_owner_department.Font = new System.Drawing.Font("Segoe UI Light", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_owner_department.Location = new System.Drawing.Point(3, 47);
             this.lb_owner_department.Name = "lb_owner_department";
-            this.lb_owner_department.Size = new System.Drawing.Size(195, 28);
+            this.lb_owner_department.Size = new System.Drawing.Size(194, 28);
             this.lb_owner_department.TabIndex = 5;
             this.lb_owner_department.Text = "lb_owner_department";
             // 
@@ -612,6 +598,9 @@
             this.grouplist.TabIndex = 2;
             this.grouplist.UseCompatibleStateImageBehavior = false;
             this.grouplist.View = System.Windows.Forms.View.List;
+            this.grouplist.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.grouplist_ItemCheck);
+            this.grouplist.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.grouplist_ItemChecked);
+            this.grouplist.SelectedIndexChanged += new System.EventHandler(this.grouplist_SelectedIndexChanged);
             // 
             // label17
             // 
@@ -620,7 +609,7 @@
             this.label17.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label17.Location = new System.Drawing.Point(3, 13);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(141, 19);
+            this.label17.Size = new System.Drawing.Size(143, 19);
             this.label17.TabIndex = 1;
             this.label17.Text = "AVAILABLE GROUPS";
             // 
@@ -667,6 +656,7 @@
             // 
             // Page_computer
             // 
+            this.Page_computer.Controls.Add(this.lbCompNameError);
             this.Page_computer.Controls.Add(this.label42);
             this.Page_computer.Controls.Add(this.prefixpanel);
             this.Page_computer.Controls.Add(this.namestatuspanel);
@@ -687,6 +677,16 @@
             this.Page_computer.TabIndex = 4;
             this.Page_computer.Text = "Page_computer";
             this.Page_computer.UseVisualStyleBackColor = true;
+            // 
+            // lbCompNameError
+            // 
+            this.lbCompNameError.AutoSize = true;
+            this.lbCompNameError.ForeColor = System.Drawing.Color.Red;
+            this.lbCompNameError.Location = new System.Drawing.Point(130, 68);
+            this.lbCompNameError.Name = "lbCompNameError";
+            this.lbCompNameError.Size = new System.Drawing.Size(101, 13);
+            this.lbCompNameError.TabIndex = 16;
+            this.lbCompNameError.Text = "lbCompNameError";
             // 
             // label42
             // 
@@ -1000,12 +1000,12 @@
             // SCCMPackageId
             // 
             this.SCCMPackageId.Text = "Package ID";
-            this.SCCMPackageId.Width = 124;
+            this.SCCMPackageId.Width = 100;
             // 
             // SCCMProgramId
             // 
             this.SCCMProgramId.Text = "Program";
-            this.SCCMProgramId.Width = 201;
+            this.SCCMProgramId.Width = 250;
             // 
             // softwarepanel
             // 
@@ -1042,7 +1042,7 @@
             this.label26.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.label26.Location = new System.Drawing.Point(8, 45);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(158, 19);
+            this.label26.Size = new System.Drawing.Size(160, 19);
             this.label26.TabIndex = 8;
             this.label26.Text = "AVAILABLE SOFTWARE";
             // 
@@ -1074,194 +1074,34 @@
             // panel7
             // 
             this.panel7.AutoScroll = true;
-            this.panel7.Controls.Add(this.label30);
-            this.panel7.Controls.Add(this.lb_summary_software);
-            this.panel7.Controls.Add(this.label29);
-            this.panel7.Controls.Add(this.lb_summary_language);
-            this.panel7.Controls.Add(this.label36);
-            this.panel7.Controls.Add(this.lb_summary_department);
-            this.panel7.Controls.Add(this.label32);
-            this.panel7.Controls.Add(this.lb_summary_location);
-            this.panel7.Controls.Add(this.label33);
-            this.panel7.Controls.Add(this.lb_summary_description);
-            this.panel7.Controls.Add(this.label34);
-            this.panel7.Controls.Add(this.lb_summary_group);
-            this.panel7.Controls.Add(this.label35);
-            this.panel7.Controls.Add(this.lb_summary_owner);
-            this.panel7.Controls.Add(this.label38);
-            this.panel7.Controls.Add(this.lb_summary_ou);
-            this.panel7.Controls.Add(this.label39);
-            this.panel7.Controls.Add(this.label37);
+            this.panel7.Controls.Add(this.listViewSummary);
             this.panel7.Location = new System.Drawing.Point(6, 46);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(657, 256);
             this.panel7.TabIndex = 11;
             // 
-            // label30
+            // listViewSummary
             // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label30.Location = new System.Drawing.Point(12, 3);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(85, 19);
-            this.label30.TabIndex = 9;
-            this.label30.Text = "COMPUTER";
+            this.listViewSummary.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Attribute,
+            this.Value});
+            this.listViewSummary.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewSummary.Location = new System.Drawing.Point(16, 12);
+            this.listViewSummary.Name = "listViewSummary";
+            this.listViewSummary.Size = new System.Drawing.Size(617, 241);
+            this.listViewSummary.TabIndex = 11;
+            this.listViewSummary.UseCompatibleStateImageBehavior = false;
+            this.listViewSummary.View = System.Windows.Forms.View.Details;
             // 
-            // lb_summary_software
+            // Attribute
             // 
-            this.lb_summary_software.AutoSize = true;
-            this.lb_summary_software.Location = new System.Drawing.Point(165, 169);
-            this.lb_summary_software.Name = "lb_summary_software";
-            this.lb_summary_software.Size = new System.Drawing.Size(117, 13);
-            this.lb_summary_software.TabIndex = 10;
-            this.lb_summary_software.Text = "lb_summary_software";
+            this.Attribute.Text = "Attribute";
+            this.Attribute.Width = 130;
             // 
-            // label29
+            // Value
             // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(14, 41);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(114, 13);
-            this.label29.TabIndex = 8;
-            this.label29.Text = "Organizational unit :";
-            // 
-            // lb_summary_language
-            // 
-            this.lb_summary_language.AutoSize = true;
-            this.lb_summary_language.Location = new System.Drawing.Point(165, 152);
-            this.lb_summary_language.Name = "lb_summary_language";
-            this.lb_summary_language.Size = new System.Drawing.Size(121, 13);
-            this.lb_summary_language.TabIndex = 10;
-            this.lb_summary_language.Text = "lb_summary_language";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(14, 25);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(48, 13);
-            this.label36.TabIndex = 8;
-            this.label36.Text = "Owner :";
-            // 
-            // lb_summary_department
-            // 
-            this.lb_summary_department.AutoSize = true;
-            this.lb_summary_department.Location = new System.Drawing.Point(164, 104);
-            this.lb_summary_department.Name = "lb_summary_department";
-            this.lb_summary_department.Size = new System.Drawing.Size(132, 13);
-            this.lb_summary_department.TabIndex = 10;
-            this.lb_summary_department.Text = "lb_summary_department";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(14, 57);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(104, 13);
-            this.label32.TabIndex = 8;
-            this.label32.Text = "Member of group :";
-            // 
-            // lb_summary_location
-            // 
-            this.lb_summary_location.AutoSize = true;
-            this.lb_summary_location.Location = new System.Drawing.Point(165, 88);
-            this.lb_summary_location.Name = "lb_summary_location";
-            this.lb_summary_location.Size = new System.Drawing.Size(114, 13);
-            this.lb_summary_location.TabIndex = 10;
-            this.lb_summary_location.Text = "lb_summary_location";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(14, 73);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(72, 13);
-            this.label33.TabIndex = 8;
-            this.label33.Text = "Description :";
-            // 
-            // lb_summary_description
-            // 
-            this.lb_summary_description.AutoSize = true;
-            this.lb_summary_description.Location = new System.Drawing.Point(165, 72);
-            this.lb_summary_description.Name = "lb_summary_description";
-            this.lb_summary_description.Size = new System.Drawing.Size(130, 13);
-            this.lb_summary_description.TabIndex = 10;
-            this.lb_summary_description.Text = "lb_summary_description";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(14, 89);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(57, 13);
-            this.label34.TabIndex = 8;
-            this.label34.Text = "Location :";
-            // 
-            // lb_summary_group
-            // 
-            this.lb_summary_group.AutoSize = true;
-            this.lb_summary_group.Location = new System.Drawing.Point(165, 56);
-            this.lb_summary_group.Name = "lb_summary_group";
-            this.lb_summary_group.Size = new System.Drawing.Size(104, 13);
-            this.lb_summary_group.TabIndex = 10;
-            this.lb_summary_group.Text = "lb_summary_group";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(13, 105);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(74, 13);
-            this.label35.TabIndex = 8;
-            this.label35.Text = "Department :";
-            // 
-            // lb_summary_owner
-            // 
-            this.lb_summary_owner.AutoSize = true;
-            this.lb_summary_owner.Location = new System.Drawing.Point(165, 24);
-            this.lb_summary_owner.Name = "lb_summary_owner";
-            this.lb_summary_owner.Size = new System.Drawing.Size(105, 13);
-            this.lb_summary_owner.TabIndex = 10;
-            this.lb_summary_owner.Text = "lb_summary_owner";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(14, 153);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(64, 13);
-            this.label38.TabIndex = 8;
-            this.label38.Text = "Language :";
-            // 
-            // lb_summary_ou
-            // 
-            this.lb_summary_ou.AutoSize = true;
-            this.lb_summary_ou.Location = new System.Drawing.Point(165, 40);
-            this.lb_summary_ou.Name = "lb_summary_ou";
-            this.lb_summary_ou.Size = new System.Drawing.Size(86, 13);
-            this.lb_summary_ou.TabIndex = 10;
-            this.lb_summary_ou.Text = "lb_summary_ou";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(14, 170);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(59, 13);
-            this.label39.TabIndex = 8;
-            this.label39.Text = "Software :";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label37.Location = new System.Drawing.Point(13, 128);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(144, 19);
-            this.label37.TabIndex = 9;
-            this.label37.Text = "OPERATING SYSTEM";
+            this.Value.Text = "Value";
+            this.Value.Width = 433;
             // 
             // label28
             // 
@@ -1444,7 +1284,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.Page_summary.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
             this.Finished.ResumeLayout(false);
             this.computercreatedpanel.ResumeLayout(false);
             this.computercreatedpanel.PerformLayout();
@@ -1528,25 +1367,6 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TabPage Page_summary;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label lb_summary_department;
-        private System.Windows.Forms.Label lb_summary_location;
-        private System.Windows.Forms.Label lb_summary_description;
-        private System.Windows.Forms.Label lb_summary_group;
-        private System.Windows.Forms.Label lb_summary_owner;
-        private System.Windows.Forms.Label lb_summary_ou;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label lb_summary_software;
-        private System.Windows.Forms.Label lb_summary_language;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.TabPage Finished;
         private System.Windows.Forms.Panel loadingpanel;
         private System.Windows.Forms.Label loadinglabel;
@@ -1575,6 +1395,11 @@
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.ComboBox oslist;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.ListView listViewSummary;
+        private System.Windows.Forms.ColumnHeader Attribute;
+        private System.Windows.Forms.ColumnHeader Value;
+        private System.Windows.Forms.Label lbCompNameError;
     }
 }
 

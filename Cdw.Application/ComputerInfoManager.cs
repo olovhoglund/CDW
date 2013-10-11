@@ -14,7 +14,7 @@ namespace Cdw.App
 
         public ComputerInfoResult GetComputerInfo(Computer computer)
         {
-            var powershell = new Powershell.Manager();
+            var powershell = new Powershell.Manager("");
             var result = new OperationResult();
             result = powershell.GetComputerBIOSInfo(ref computer);
             var response = new ComputerInfoResult(computer, result);

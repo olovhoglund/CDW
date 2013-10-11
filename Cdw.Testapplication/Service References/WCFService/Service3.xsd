@@ -77,10 +77,10 @@
   <xs:element name="ArrayOfOrganizationalUnit" nillable="true" type="tns:ArrayOfOrganizationalUnit" />
   <xs:complexType name="OrganizationalUnit">
     <xs:sequence>
-      <xs:element name="_x003C_ComputerNamePrefix_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_ComputerNamePrefixes_x003E_k__BackingField" nillable="true" type="q4:ArrayOfstring" />
       <xs:element name="_x003C_DisplayName_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_DistinguishedName_x003E_k__BackingField" nillable="true" type="xs:string" />
-      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Groups_x003E_k__BackingField" nillable="true" type="q4:ArrayOfstring" />
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Groups_x003E_k__BackingField" nillable="true" type="q5:ArrayOfstring" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="OrganizationalUnit" nillable="true" type="tns:OrganizationalUnit" />
@@ -102,8 +102,8 @@
   <xs:element name="UserContext" nillable="true" type="tns:UserContext" />
   <xs:complexType name="OperationResult">
     <xs:sequence>
-      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Errors_x003E_k__BackingField" nillable="true" type="q5:ArrayOfstring" />
-      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Messages_x003E_k__BackingField" nillable="true" type="q6:ArrayOfstring" />
+      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Errors_x003E_k__BackingField" nillable="true" type="q6:ArrayOfstring" />
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" name="_x003C_Messages_x003E_k__BackingField" nillable="true" type="q7:ArrayOfstring" />
       <xs:element name="_x003C_ResultAsComputer_x003E_k__BackingField" nillable="true" type="tns:Computer" />
       <xs:element name="_x003C_ResultAsString_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_ResultAsUser_x003E_k__BackingField" nillable="true" type="tns:User" />
@@ -132,6 +132,7 @@
       <xs:element name="_x003C_Group_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_SCCMPackageId_x003E_k__BackingField" nillable="true" type="xs:string" />
       <xs:element name="_x003C_SCCMProgram_x003E_k__BackingField" nillable="true" type="xs:string" />
+      <xs:element name="_x003C_Selected_x003E_k__BackingField" type="xs:boolean" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SoftwareItem" nillable="true" type="tns:SoftwareItem" />

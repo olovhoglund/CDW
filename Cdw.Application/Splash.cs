@@ -41,7 +41,7 @@ namespace Cdw.App
         {
             var computer = new Computer();
             SynchronizationContext uiContext = state as SynchronizationContext;
-            var ps = new Cdw.Powershell.Manager();
+            var ps = new Cdw.Powershell.Manager("");
             var result = ps.GetComputerBIOSInfo(ref computer);
             if (result.HasErrors())
             {

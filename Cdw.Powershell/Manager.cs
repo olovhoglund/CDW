@@ -8,6 +8,8 @@ using Cdw.Objects;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Threading.Tasks;
+//using Microsoft.ActiveDirectory.Management;
+using System.DirectoryServices;
 
 namespace Cdw.Powershell
 {
@@ -23,6 +25,13 @@ namespace Cdw.Powershell
         /// </summary>
         private const int computerNameNumberLength = 4;
 
+        private string _domainController;
+
+        public Manager(string domainController)
+        {
+            _domainController = domainController;
+        }
+
         /// <summary>
         /// Creates a computer entry in Active Directory
         /// </summary>
@@ -35,17 +44,19 @@ namespace Cdw.Powershell
                 {
                     Pipeline pipeline = runspace.CreatePipeline();
                     InitializePS(ref Result, pipeline);
-                    if (Result.Status == Statics.Result.Error) {
-	                    return Result;
+                    if (Result.Status == Statics.Result.Error)
+                    {
+                        return Result;
                     }
                     pipeline = runspace.CreatePipeline();
                     Command getProcess = new Command("New-ADComputer");
-	                getProcess.Parameters.Add("Name", computer.Name);
+                    getProcess.Parameters.Add("Name", computer.Name);
                     getProcess.Parameters.Add("SamAccountName", computer.Name);
                     getProcess.Parameters.Add("Path", computer.OrganizationalUnit);
                     getProcess.Parameters.Add("Location", computer.Location);
                     getProcess.Parameters.Add("Description", computer.Description);
                     getProcess.Parameters.Add("ManagedBy", computer.Owner);
+                    getProcess.Parameters.Add("Server", _domainController);
                     if (computer.Department.Length > 0)
                     {
                         var attrs = new Hashtable();
@@ -55,13 +66,59 @@ namespace Cdw.Powershell
                     pipeline.Commands.Add(getProcess);
                     System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> output = null;
                     output = pipeline.Invoke();
-                    if ((pipeline.Error != null) && pipeline.Error.Count > 0) {
-	                    foreach (object Err in pipeline.Error.ReadToEnd()) {
-			                    Result.Errors.Add(Err.ToString());
-			                    Result.Status = Statics.Result.Error;
-		                    }
-	                    }
-                    else 
+                    if ((pipeline.Error != null) && pipeline.Error.Count > 0)
+                    {
+                        foreach (object Err in pipeline.Error.ReadToEnd())
+                        {
+                            Result.Errors.Add(Err.ToString());
+                            Result.Status = Statics.Result.Error;
+                        }
+                    }
+                    else
+                    {
+                        Result.Status = Statics.Result.Success;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Result.Status = Statics.Result.Error;
+                Result.Errors.Add(ex.Message);
+                Result.Errors.Add(ex.StackTrace);
+            }
+            return Result;
+        }
+
+        public OperationResult AddComputerToGroup(Objects.Computer computer, string group)
+        {
+            var Result = new OperationResult();
+            try
+            {
+                using (Runspace runspace = GetRunspace(ref Result))
+                {
+                    Pipeline pipeline = runspace.CreatePipeline();
+                    InitializePS(ref Result, pipeline);
+                    if (Result.Status == Statics.Result.Error)
+                    {
+                        return Result;
+                    }
+                    pipeline = runspace.CreatePipeline();
+                    Command getProcess = new Command("Add-ADPrincipalGroupMembership");
+                    getProcess.Parameters.Add("Identity", "CN=" + computer.Name + ","  + computer.OrganizationalUnit);
+                    getProcess.Parameters.Add("MemberOf", group);
+                    getProcess.Parameters.Add("Server", _domainController);
+                    pipeline.Commands.Add(getProcess);
+                    System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> output = null;
+                    output = pipeline.Invoke();
+                    if ((pipeline.Error != null) && pipeline.Error.Count > 0)
+                    {
+                        foreach (object Err in pipeline.Error.ReadToEnd())
+                        {
+                            Result.Errors.Add(Err.ToString());
+                            Result.Status = Statics.Result.Error;
+                        }
+                    }
+                    else
                     {
                         Result.Status = Statics.Result.Success;
                     }
@@ -108,42 +165,42 @@ namespace Cdw.Powershell
                     }
                     else
                     {
-                            // loop through all names to find potential gaps in the sequence or take the last one.
-                            // select the computer name only from the list of objects
-                            List<string> computers = (from System.Management.Automation.PSObject result in output select result.Properties["Name"].Value.ToString()).ToList();
-                            // get only the incremental numbers - not the prefix
-                            IList<int> computerNumbers = (from computer in computers select computer.Substring(prefix.Length) into cIterator where IsNumeric(cIterator, NumberStyles.Integer) select Int32.Parse(cIterator)).ToList();
-                            // order the list
-                            computerNumbers = (from c in computerNumbers orderby c select c).ToList();
+                        // loop through all names to find potential gaps in the sequence or take the last one.
+                        // select the computer name only from the list of objects
+                        List<string> computers = (from System.Management.Automation.PSObject result in output select result.Properties["Name"].Value.ToString()).ToList();
+                        // get only the incremental numbers - not the prefix
+                        IList<int> computerNumbers = (from computer in computers select computer.Substring(prefix.Length) into cIterator where IsNumeric(cIterator, NumberStyles.Integer) select Int32.Parse(cIterator)).ToList();
+                        // order the list
+                        computerNumbers = (from c in computerNumbers orderby c select c).ToList();
 
-                            for (var i = 0; i < computerNumbers.Count; i++)
+                        for (var i = 0; i < computerNumbers.Count; i++)
+                        {
+                            // If the incremental difference between this number and the one before is more than 1, we break and return it.
+                            // Remember, we have to left pad the iterator.
+                            if (i > 0 && (computerNumbers[i - 1] + 1) < computerNumbers[i])
                             {
-                                // If the incremental difference between this number and the one before is more than 1, we break and return it.
-                                // Remember, we have to left pad the iterator.
-                                if (i > 0 && (computerNumbers[i - 1] + 1) < computerNumbers[i])
-                                {
-                                    Result.ResultAsString = prefix + (computerNumbers[i - 1] + 1).ToString().PadLeft(computerNameNumberLength, '0');
-                                    Result.Status = Statics.Result.Success;
-                                    return Result;
-                                }
-                            }
-
-                            // If none of the existing computer belongs to a series, we create a new one.
-                            if (computerNumbers.Count == 0)
-                            {
-                                Result.ResultAsString = prefix + "1".PadLeft(computerNameNumberLength, '0');
+                                Result.ResultAsString = prefix + (computerNumbers[i - 1] + 1).ToString().PadLeft(computerNameNumberLength, '0');
                                 Result.Status = Statics.Result.Success;
                                 return Result;
                             }
-                            else
-                            {
-                                // Otherwise we return the next incremental step in the series.
-                                // Remember, we have to left pad the iterator.
-                                Result.ResultAsString = prefix + (computerNumbers.Last() + 1).ToString().PadLeft(computerNameNumberLength, '0');
-                                Result.Status = Statics.Result.Success;
-                                return Result;
-                            }
-                      }
+                        }
+
+                        // If none of the existing computer belongs to a series, we create a new one.
+                        if (computerNumbers.Count == 0)
+                        {
+                            Result.ResultAsString = prefix + "1".PadLeft(computerNameNumberLength, '0');
+                            Result.Status = Statics.Result.Success;
+                            return Result;
+                        }
+                        else
+                        {
+                            // Otherwise we return the next incremental step in the series.
+                            // Remember, we have to left pad the iterator.
+                            Result.ResultAsString = prefix + (computerNumbers.Last() + 1).ToString().PadLeft(computerNameNumberLength, '0');
+                            Result.Status = Statics.Result.Success;
+                            return Result;
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -206,7 +263,7 @@ namespace Cdw.Powershell
                 using (Runspace runspace = GetRunspace(ref Result))
                 {
                     Pipeline pipeline = runspace.CreatePipeline();
-                    Command getProcess = new Command("Get-WmiObject win32_bios | Select Manufacturer,Name,BIOSVersion,ReleaseDate,SMBIOSBIOSVersion",true);
+                    Command getProcess = new Command("Get-WmiObject win32_bios | Select Manufacturer,Name,BIOSVersion,ReleaseDate,SMBIOSBIOSVersion", true);
                     pipeline.Commands.Add(getProcess);
                     System.Collections.ObjectModel.Collection<System.Management.Automation.PSObject> output = null;
                     output = pipeline.Invoke();
@@ -229,7 +286,7 @@ namespace Cdw.Powershell
                         {
                             throw new Exception("No BIOS information available");
                         }
-                        
+
                     }
                 }
             }
@@ -379,6 +436,19 @@ namespace Cdw.Powershell
                             user.DisplayName = output[0].Properties["DisplayName"].Value.ToString();
                             user.Username = output[0].Properties["samAccountName"].Value.ToString();
                             user.Email = output[0].Properties["mail"].Value.ToString();
+
+                            user.MemberOf= new List<String>();
+
+                            var memberOfList=  new List<string>();
+
+                            foreach (var grp in (IEnumerable)output[0].Properties["memberOf"].Value)
+                            {
+
+                                String name = GetGroupName(grp.ToString());
+                                user.MemberOf.Add(name);
+                                System.Diagnostics.Debug.WriteLine("Grupp: " + name);
+                            };
+
                             Result.ResultAsUser = user;
                             Result.Status = Statics.Result.Success;
                         }
@@ -404,6 +474,30 @@ namespace Cdw.Powershell
             }
             return Result;
         }
+
+        public string GetGroupName(string LDAPGroupEntry)
+        {
+            string[] split = LDAPGroupEntry.Split(',');
+            //List<string> cnValues = new List<string>();
+            foreach (string pair in split)
+            {
+                string[] keyValue = pair.Split('=');
+                if (keyValue[0] == "CN")
+                    // return first value
+                    //cnValues.Add(keyValue[1]);
+                    return keyValue[1];
+            }
+            //No error handling ?
+            return "";
+        }
+
+        //ToDo Bort
+        //public string GetGroupName(string LDAPGroupEntry)
+        //{
+        //// LDAPGroupEntry is in the form "LDAP://CN=Foo Group Name,DC=mydomain,DC=com"
+        //DirectoryEntry grp = new DirectoryEntry(LDAPGroupEntry);
+        //return grp.Properties["CN"].Value.ToString();
+        //}
 
         public static bool IsNumeric(string val, System.Globalization.NumberStyles numberStyle)
         {
@@ -454,9 +548,9 @@ namespace Cdw.Powershell
                         if (output.Count > 0)
                         {
                             comp.Name = output[0].Properties["Name"].Value.ToString();
-                            comp.OrganizationalUnit = output[0].Properties["DistinguishedName"].Value.ToString().Replace("CN=" + computername +",","");
+                            comp.OrganizationalUnit = output[0].Properties["DistinguishedName"].Value.ToString().Replace("CN=" + computername + ",", "");
                             comp.Exists = true;
-                            Result.ResultAsComputer= comp;
+                            Result.ResultAsComputer = comp;
                             Result.Status = Statics.Result.Success;
                         }
                         else

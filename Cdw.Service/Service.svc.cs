@@ -45,6 +45,28 @@ namespace Cdw.Service
                     Response.DeploymentContext.Domain = Properties.Settings.Default.ADDomain;
                     Response.DeploymentContext.DomainController = Properties.Settings.Default.ADDomainController;
                     Response.DeploymentContext.ForceGeneratedName = Properties.Settings.Default.ForceGeneratedComputerNames;
+
+                    // get the user object
+                    System.Diagnostics.Debug.WriteLine("Startar PowerShell");
+                    var ps = new Powershell.Manager(Properties.Settings.Default.ADDomainController);
+                    var psResult = ps.GetUser(request.Username);
+                    if (psResult == null)
+                        throw new ApplicationException("psResult null");
+                    if (psResult.HasErrors())
+                    {
+                        string errmsg = "";
+                        foreach(string str in psResult.Errors)
+                             errmsg += str;
+                        throw new ApplicationException(errmsg);
+                    }
+
+                    System.Diagnostics.Debug.WriteLine("GetUser klar.");
+                    var context = new UserContext();
+                    context.Username = psResult.ResultAsUser.Username;
+                    context.DisplayName = psResult.ResultAsUser.DisplayName;
+                    context.Mail = psResult.ResultAsUser.Email;
+                    Response.User = context;
+
                     var deSerializer = new XmlSerializer(typeof(List<OrganizationalUnit>));
                     XmlDocument doc = new XmlDocument();
                     doc.Load(HostingEnvironment.MapPath("~/OrganizationalUnits.xml"));
@@ -52,34 +74,34 @@ namespace Cdw.Service
                     foreach (XmlNode ouNode in doc.GetElementsByTagName("OrganizationalUnit"))
                     {
                         // check if user has access
-                        foreach (XmlNode userNode in ouNode.SelectNodes("Users/User"))
+                        bool access = false;
+                        foreach (XmlNode userNode in ouNode.SelectNodes("AllowedGroups/Group"))
                         {
-                            if (userNode.InnerText.ToLower().Trim() == request.Username.ToLower().Trim())
+                            foreach (string usergrp in psResult.ResultAsUser.MemberOf)
                             {
-                                var ou = new OrganizationalUnit();
-                                ou.DisplayName = ouNode.SelectNodes("DisplayName")[0].InnerText;
-                                ou.DistinguishedName = ouNode.SelectNodes("DistinguishedName")[0].InnerText;
-                                foreach (XmlNode prefixNode in ouNode.SelectNodes("ComputerNamePrefixes/Prefix"))
+                                if (userNode.InnerText.ToLower().Trim() == usergrp.ToLower().Trim())
                                 {
-                                    ou.ComputerNamePrefixes.Add(prefixNode.InnerText);
+                                    var ou = new OrganizationalUnit();
+                                    ou.DisplayName = ouNode.SelectNodes("DisplayName")[0].InnerText;
+                                    ou.DistinguishedName = ouNode.SelectNodes("DistinguishedName")[0].InnerText;
+                                    foreach (XmlNode prefixNode in ouNode.SelectNodes("ComputerNamePrefixes/Prefix"))
+                                    {
+                                        ou.ComputerNamePrefixes.Add(prefixNode.InnerText);
+                                    }
+                                    foreach (XmlNode groupNode in ouNode.SelectNodes("Groups/Group"))
+                                    {
+                                        ou.Groups.Add(groupNode.InnerText);
+                                    }
+                                    ous.Add(ou);
+                                    access = true;
+                                    break;
                                 }
-                                foreach (XmlNode groupNode in ouNode.SelectNodes("Groups/Group"))
-                                {
-                                    ou.Groups.Add(groupNode.InnerText);
-                                }
-                                ous.Add(ou);
                             }
+                            if (access)
+                                break;
                         }
                     }
                     Response.DeploymentContext.OrganizationalUnits = ous;
-                    // get the user object
-                    var ps = new Powershell.Manager();
-                    var psResult = ps.GetUser(request.Username);
-                    var context = new UserContext();
-                    context.Username = psResult.ResultAsUser.Username;
-                    context.DisplayName = psResult.ResultAsUser.DisplayName;
-                    context.Mail = psResult.ResultAsUser.Email;
-                    Response.User = context;
                 }
                 else
                 {
@@ -96,15 +118,26 @@ namespace Cdw.Service
 
         public OperationResult CreateComputer(Objects.Computer computer)
         {
-            var ps = new Powershell.Manager();
+            var ps = new Powershell.Manager(Properties.Settings.Default.ADDomainController);
             var result = ps.CreateComputer(computer);
+            // wait a bit
+            System.Threading.Thread.Sleep(3000);
+            foreach (string group in computer.Groups)
+            {
+                var res = ps.AddComputerToGroup(computer, group);
+                if (res.HasErrors())
+                {
+                    result.Errors.AddRange(res.Errors);
+                    result.Status = Statics.Result.Error;
+                }
+            }
             return result;
         }
 
 
         public OperationResult GetUser(string username)
         {
-            var ps = new Powershell.Manager();
+            var ps = new Powershell.Manager(Properties.Settings.Default.ADDomainController);
             var result = ps.GetUser(username);
             return result;
         }
@@ -125,16 +158,31 @@ namespace Cdw.Service
                                 var groupName = appGroupNode.Attributes.GetNamedItem("Name").Value;
                                 foreach (XmlNode appNode in appGroupNode.SelectNodes("Application"))
                                 {
-                                    if (appNode.SelectNodes("Program").Count > 0)
+                                    // Is it an Application?
+                                    if (appNode.Attributes.GetNamedItem("Name") != null)
                                     {
-                                        var app = new SoftwareItem();
+                                        var app= new SoftwareItem();
                                         var appId = (string)appNode.Attributes.GetNamedItem("Id").Value;
+                                        app.SCCMInstallationType = InstallationType.Application;
                                         app.Group = groupName;
+                                        app.SCCMName = appNode.Attributes.GetNamedItem("Name").Value;
                                         app.DisplayName = appNode.Attributes.GetNamedItem("DisplayName").Value;
-                                        app.SCCMPackageId = appNode.SelectNodes("Program")[0].Attributes.GetNamedItem("PackageId").Value;
-                                        app.SCCMProgram = appNode.SelectNodes("Program")[0].InnerText;
                                         app.Selected = selectedItems.Contains(appId);
                                         Response.Add(app);
+                                    }
+                                    else
+                                    {
+                                        if (appNode.SelectNodes("Program").Count > 0)
+                                        {
+                                            var app = new SoftwareItem();
+                                            var appId = (string)appNode.Attributes.GetNamedItem("Id").Value;
+                                            app.Group = groupName;
+                                            app.DisplayName = appNode.Attributes.GetNamedItem("DisplayName").Value;
+                                            app.SCCMPackageId = appNode.SelectNodes("Program")[0].Attributes.GetNamedItem("PackageId").Value;
+                                            app.SCCMProgram = appNode.SelectNodes("Program")[0].InnerText;
+                                            app.Selected = selectedItems.Contains(appId);
+                                            Response.Add(app);
+                                        }
                                     }
                                 }
                             }
@@ -148,7 +196,7 @@ namespace Cdw.Service
 
         public OperationResult GetNextAvailableComputerName(string prefix)
         {
-            var ps = new Powershell.Manager();
+            var ps = new Powershell.Manager(Properties.Settings.Default.ADDomainController);
             var result = ps.GetNextAvailableComputerName(prefix);
             return result;
         }
@@ -156,7 +204,7 @@ namespace Cdw.Service
 
         public OperationResult GetComputer(string computername)
         {
-            var ps = new Powershell.Manager();
+            var ps = new Powershell.Manager(Properties.Settings.Default.ADDomainController);
             var result = ps.GetComputer(computername);
             return result;
         }
